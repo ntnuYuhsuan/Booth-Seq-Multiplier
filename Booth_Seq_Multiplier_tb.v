@@ -14,7 +14,7 @@ module Booth_Seq_Multiplier_tb;
     
     // Internal signals for monitoring
     wire [3:0] A_monitor;
-    wire Q_minus_one_monitor;
+    wire Q_m1_monitor;
     wire [3:0] Q_temp_monitor;
     wire [2:0] Count_monitor;
     
@@ -37,7 +37,7 @@ module Booth_Seq_Multiplier_tb;
     
     // For debug monitoring
     assign A_monitor = dut.A;
-    assign Q_minus_one_monitor = dut.Q_minus_one;
+    assign Q_m1_monitor = dut.Q_m1;
     assign Q_temp_monitor = dut.Q_temp;
     assign Count_monitor = dut.Count;
     
@@ -68,7 +68,7 @@ module Booth_Seq_Multiplier_tb;
         if (!reset && !load && Count_monitor != 0 && Count_monitor != prev_count) begin
             iter_count = 4 - Count_monitor;
             $display("Time: %0t ns - Iteration %0d: A=%b, Q=%b, Q[-1]=%b", 
-                    $time, iter_count, A_monitor, Q_temp_monitor, Q_minus_one_monitor);
+                    $time, iter_count, A_monitor, Q_temp_monitor, Q_m1_monitor);
             prev_count = Count_monitor;  // 更新prev_count
         end
         
